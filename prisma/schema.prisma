@@ -14,6 +14,22 @@ datasource db {
   relationMode = "prisma"
 }
 
+
+model SchoolAccount {
+  id String @id @default(uuid())
+  name String @db.Text
+  email String
+  password String
+  country String
+  district String
+  subcounty String
+  parish String
+
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+
 model Course {
   id String @id @default(uuid())
   userId String
