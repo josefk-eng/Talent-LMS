@@ -43,7 +43,7 @@ export default function Page() {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const user = await axios.post("/api/accounts/login", values);
+            const user = await axios.post("/api/login", values);
 
             if (!user) {
                 toast.error("No Account with the mentioned email")
