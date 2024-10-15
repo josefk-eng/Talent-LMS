@@ -63,9 +63,9 @@ export default function Page() {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            // const response = await axios.post("/api/accounts", values);
-            // router.push(`/sign-in/${response.data.email}`);
-            // toast.success("School registered");
+            const response = await axios.post("/api/accounts", values);
+            router.push(`/sign-in/${response.data.email}`);
+            toast.success("School registered");
             console.log(values);
         } catch (error) {
             toast.error("Something went wrong");
