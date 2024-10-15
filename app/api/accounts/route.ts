@@ -1,32 +1,32 @@
-import { db } from "@/lib/db";
-import { count } from "console";
-import { NextResponse } from "next/server";
+// import { db } from "@/lib/db";
+// import { count } from "console";
+// import { NextResponse } from "next/server";
 
-export async function POST(req:Request) {
+// export async function POST(req:Request) {
 
 
-    try {
+//     try {
 
-        const { name, country, district, subcounty, parish, email, password} = await req.json();
+//         const { name, country, district, subcounty, parish, email, password} = await req.json();
 
-        const account = await db.schoolAccount.create({
-            data: {
-                name,
-                country,
-                district,
-                subcounty,
-                parish,
-                email,
-                password
-            }
-        });
+//         const account = await db.schoolAccount.create({
+//             data: {
+//                 name,
+//                 country,
+//                 district,
+//                 subcounty,
+//                 parish,
+//                 email,
+//                 password
+//             }
+//         });
 
-        return NextResponse.json(account);
+//         return NextResponse.json(account);
         
-    } catch (error) {
-        console.log("[ACCOUNTS]", error);
-        return new NextResponse("Internal Error", {status: 500});
+//     } catch (error) {
+//         console.log("[ACCOUNTS]", error);
+//         return new NextResponse("Internal Error", {status: 500});
 
-    }
+//     }
     
-}
+// }
