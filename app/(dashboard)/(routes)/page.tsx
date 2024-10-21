@@ -1,19 +1,8 @@
 'use client'
-import { UserButton } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
-export default function Home() {
+import isAuth from "@/components/isAuth";
 
-  const router = useRouter();
-
-  useEffect(()=>{
-    const session = sessionStorage.getItem('id');
-    console.log(`This is the session stored ${session}`);
-    if(!session){
-      router.push('/sign-in');
-    }
-  });
+const Home = () => {
 
   return (
     <div>
@@ -21,3 +10,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
