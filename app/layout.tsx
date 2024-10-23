@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ClerkProvider,} from "@clerk/nextjs";
 import { ToastProvider } from "@/components/providers/toaster-provider";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,7 +24,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <html lang="en">
         <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -34,7 +32,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
-    </ClerkProvider>
     
   );
 }
