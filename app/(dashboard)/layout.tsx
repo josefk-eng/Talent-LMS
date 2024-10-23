@@ -1,4 +1,3 @@
-import { SignedIn } from "@clerk/nextjs";
 import { ReactNode } from "react";
 import Sidebar from "./_components/sidebar";
 import Navbar from "./_components/navbar";
