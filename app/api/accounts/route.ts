@@ -20,7 +20,7 @@ const formSchema = z.object({
 
 
 
-export default async function POST(req:Request) {
+export  async function POST(req:Request) {
     
     const body = await req.json();
     const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
