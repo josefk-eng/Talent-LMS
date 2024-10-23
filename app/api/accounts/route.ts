@@ -68,7 +68,7 @@ export  async function POST(req:Request) {
 
 }
 
-export async function getStaticProps({ params } : any) {
+export async function generateStaticParams() {
 
     const emailExists = await db.schoolAccount.findUnique({
         where: {
@@ -76,10 +76,6 @@ export async function getStaticProps({ params } : any) {
         }
     });
 
-    return {
-        props: {
-            data: "Hello"
-        }
-    }
+    return []
 
 }
