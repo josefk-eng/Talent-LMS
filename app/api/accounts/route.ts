@@ -22,15 +22,15 @@ const formSchema = z.object({
 
 export  async function POST(req:Request) {
     
-    // const body = await req.json();
-    // const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
+    const body = await req.json();
+    const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
 
-    // //check if email exist
-    // const emailExists = await db.schoolAccount.findUnique({
-    //     where: {
-    //         email: email
-    //     }
-    // });
+    //check if email exist
+    const emailExists = await db.schoolAccount.findUnique({
+        where: {
+            email: email
+        }
+    });
 
     // if (emailExists) {
     //     return NextResponse.json({user:null, message: "This Email is associated with another account"}, {status: 409});
