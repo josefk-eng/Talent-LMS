@@ -26,11 +26,11 @@ export  async function POST(req:Request) {
     const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
 
     //check if email exist
-    const emailExists = await db.schoolAccount.findUnique({
-        where: {
-            email
-        }
-    });
+    // const emailExists = await db.schoolAccount.findUnique({
+    //     where: {
+    //         email
+    //     }
+    // });
 
     // if (emailExists) {
     //     return NextResponse.json({user:null, message: "This Email is associated with another account"}, {status: 409});
@@ -65,5 +65,21 @@ export  async function POST(req:Request) {
     // const { password: newUserPassword, ...rest } = user
 
     return NextResponse.json({user:null, message:"Account Created Successfully"}, {status:201})
+
+}
+
+export async function getStaticProps({ params } : any) {
+
+    const emailExists = await db.schoolAccount.findUnique({
+        where: {
+            email:""
+        }
+    });
+
+    return {
+        props: {
+            data: "Hello"
+        }
+    }
 
 }
