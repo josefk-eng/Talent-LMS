@@ -22,48 +22,48 @@ const formSchema = z.object({
 
 export  async function POST(req:Request) {
     
-    const body = await req.json();
-    const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
+    // const body = await req.json();
+    // const {email, name, password, country, parish, subcounty, district} = formSchema.parse(body);
 
-    //check if email exist
-    const emailExists = await db.schoolAccount.findUnique({
-        where: {
-            email: email
-        }
-    });
+    // //check if email exist
+    // const emailExists = await db.schoolAccount.findUnique({
+    //     where: {
+    //         email: email
+    //     }
+    // });
 
-    if (emailExists) {
-        return NextResponse.json({user:null, message: "This Email is associated with another account"}, {status: 409});
-    }
+    // if (emailExists) {
+    //     return NextResponse.json({user:null, message: "This Email is associated with another account"}, {status: 409});
+    // }
 
-    //check if name exists
-    const nameExists = await db.schoolAccount.findUnique({
-        where: {
-            name: name
-        }
-    });
+    // //check if name exists
+    // const nameExists = await db.schoolAccount.findUnique({
+    //     where: {
+    //         name: name
+    //     }
+    // });
 
-    if (nameExists) {
-        return NextResponse.json({user:null, message:"School name already exists"}, {status: 409});
-    }
+    // if (nameExists) {
+    //     return NextResponse.json({user:null, message:"School name already exists"}, {status: 409});
+    // }
 
-    const pass = await hash(password, 10);
+    // const pass = await hash(password, 10);
 
-    const user = await db.schoolAccount.create({
-        data:{
-            name,
-            email,
-            password:pass,
-            district,
-            subcounty,
-            country,
-            parish
-        }
+    // const user = await db.schoolAccount.create({
+    //     data:{
+    //         name,
+    //         email,
+    //         password:pass,
+    //         district,
+    //         subcounty,
+    //         country,
+    //         parish
+    //     }
 
-    });
+    // });
 
-    const { password: newUserPassword, ...rest } = user
+    // const { password: newUserPassword, ...rest } = user
 
-    return NextResponse.json({user:rest, message:"Account Created Successfully"}, {status:201})
+    return NextResponse.json({user:null, message:"Account Created Successfully"}, {status:201})
 
 }
