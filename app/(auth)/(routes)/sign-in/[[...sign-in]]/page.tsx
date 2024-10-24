@@ -15,6 +15,10 @@ import {useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 
+// import { useActionState } from 'react';
+import { useFormState } from 'react-dom';
+import { authenticate } from "@/app/lib/actions";
+import { isAuthenticated } from "@/Utils/Auth";
 
 const formSchema = z.object({
     email: z.string().email({
@@ -25,6 +29,12 @@ const formSchema = z.object({
 });
 
 export default function Page() {
+
+    const [errorMessage, formAction, isPending] = useFormState(
+        authenticate,
+        undefined,
+      );
+    
 
     const params = useParams();
     const router = useRouter();
@@ -43,21 +53,21 @@ export default function Page() {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const user = await axios.post("/api/login", values);
+            // const response = await axios.post("/api/login", values);
 
-            if (!user) {
-                toast.error("No Account with the mentioned email")
-            }else if (user.data.password !== values.password) {
-                toast.error("Invalid Password");
-            }else{
-                sessionStorage.setItem("id",user.data.id);
-                router.push("/");
-                toast.success("Logged In Successfully");
+            // if (response.data.user) {
+            //     // isAuthenticated = true;
+            //     router.push(`/${response.data.user}`);;
+            //     toast.success("Logged In Successfully")
+            // }else{
+            //     toast.error(response.data.message);
+            // }
 
-            }
+            
+            formAction
         } catch (error) {
-            console.log(error)
-            toast.error("Something went wrong");
+            console.log(`The Error is actually ${error}`)
+            toast.error(`The Error is actually ${error}`);
         }
     };
 
@@ -69,7 +79,8 @@ export default function Page() {
             <p className="text-2xl font-bold">Log In</p>
             <Form {...form}>
                             <form
-                                onSubmit={form.handleSubmit(onSubmit)}
+                            action={formAction}
+                                // onSubmit={form.handleSubmit(onSubmit)}
                                 className="space-y-2 mt-8 min-w-full"
                                 >
                                     <FormField
@@ -130,6 +141,18 @@ export default function Page() {
                                         <Button type="submit" disabled={isSubmitting} className="mr-2">Sign In</Button>
                                         <p className="py-5 text-gray-500 dark:text-gray-400 text-sm">Just Got Here? <Link key="signin" href="/sign-up" className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline">Create an account</Link> </p>
                                     </div>
+                                    <div
+                                        className="flex h-8 items-end space-x-1"
+                                        aria-live="polite"
+                                        aria-atomic="true"
+                                        >
+                                            {errorMessage && (
+                                                <>
+                                                {/* <ExclamationCircleIcon className="h-5 w-5 text-red-500" /> */}
+                                                <p className="text-sm text-red-500">{errorMessage}</p>
+                                                </>
+          )}
+        </div>
                             </form>
                         </Form>
         </div>
